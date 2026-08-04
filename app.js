@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 
 // importing router
 const authRoutes = require("./routes/authRoutes");
+const flockRoutes = require("./routes/flockRoutes");
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 
 // Any route inside authRoutes should start with /api/auth
 app.use("/api/auth", authRoutes);
+
+app.use("/api/flocks", flockRoutes);
 
 app.get("/", (req, res) => {
   res.json({
