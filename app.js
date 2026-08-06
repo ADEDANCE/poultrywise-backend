@@ -6,6 +6,8 @@ const connectDB = require("./config/db");
 // importing router
 const authRoutes = require("./routes/authRoutes");
 const flockRoutes = require("./routes/flockRoutes");
+const dailyRecordRoutes = require("./routes/dailyRecordRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -17,6 +19,10 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 
 app.use("/api/flocks", flockRoutes);
+
+app.use("/api/daily-records", dailyRecordRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get("/", (req, res) => {
   res.json({
