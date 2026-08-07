@@ -58,6 +58,48 @@ const flockSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+
+    finalSummary: {
+      totalExpenses: {
+        type: Number,
+        default: 0,
+      },
+
+      totalRevenue: {
+        type: Number,
+        default: 0,
+      },
+
+      netProfit: {
+        type: Number,
+        default: 0,
+      },
+
+      roi: {
+        type: Number,
+        default: 0,
+      },
+
+      totalMortality: {
+        type: Number,
+        default: 0,
+      },
+
+      mortalityRate: {
+        type: Number,
+        default: 0,
+      },
+
+      finalBirdCount: {
+        type: Number,
+        default: 0,
+      },
+
+      totalEggsSold: {
+        type: Number,
+        default: 0,
+      },
+    },
   },
   {
     timestamps: true,
