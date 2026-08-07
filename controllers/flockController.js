@@ -95,7 +95,7 @@ const updateFlockStage = async (req, res) => {
     }
 
     // Validate the stage
-    if (!["day-old", "grower", "layer"].includes(currentStage)) {
+    if (!["brooding", "grower", "layer"].includes(currentStage)) {
       return res.status(400).json({
         message: "Invalid flock stage",
       });
@@ -117,8 +117,43 @@ const updateFlockStage = async (req, res) => {
   }
 };
 
+const completeFlock = async (req, res) => {
+  try {
+    // Find the user's active flock
+    const flock = await Flock.findOne({
+      user: req.user._id,
+      status: "active",
+    });
+
+    // Check if an active flock exists
+    if (!flock) {
+      return res.status(404).json({
+        message: "No active flock found",
+      });
+    }
+
+    // Update the flock
+    flock.status = "completed";
+    flock.completedAt = new Date();
+
+    // Save the changes
+    await flock.save();
+
+    res.status(200).json({
+      message: "Flock completed successfully",
+      flock,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to complete flock",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createFlock,
   getActiveFlock,
   updateFlockStage,
+  completeFlock,
 };
