@@ -8,10 +8,12 @@ const {
   createFlock,
   getActiveFlock,
   updateFlockStage,
+  completeFlock,
 } = require("../controllers/flockController");
 
 router.post("/", protect, createFlock);
 router.get("/", protect, getActiveFlock);
 router.patch("/stage", protect, updateFlockStage);
+router.patch("/complete", protect, completeFlock);
 
 module.exports = router;
