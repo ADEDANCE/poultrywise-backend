@@ -38,8 +38,8 @@ const flockSchema = new mongoose.Schema(
 
     currentStage: {
       type: String,
-      enum: ["day-old", "grower", "layer"],
-      default: "day-old",
+      enum: ["brooding", "grower", "layer"],
+      default: "brooding",
     },
 
     initialCost: {
@@ -52,6 +52,11 @@ const flockSchema = new mongoose.Schema(
       type: String,
       enum: ["active", "completed"],
       default: "active",
+    },
+
+    completedAt: {
+      type: Date,
+      default: null,
     },
   },
   {
