@@ -1,5 +1,6 @@
 // Import the Flock model
 const Flock = require("../models/Flock");
+const { getFlockAnalytics } = require("../services/flockAnalyticsService");
 
 const createFlock = async (req, res) => {
   try {
@@ -125,18 +126,23 @@ const completeFlock = async (req, res) => {
       status: "active",
     });
 
-    // Check if an active flock exists
     if (!flock) {
       return res.status(404).json({
         message: "No active flock found",
       });
     }
 
-    // Update the flock
+    // Get the final performance of the flock
+    const finalSummary = await getFlockAnalytics(req.user._id);
+
+    // Mark the flock as completed
     flock.status = "completed";
     flock.completedAt = new Date();
 
-    // Save the changes
+    // Save the final performance
+    flock.finalSummary = finalSummary;
+
+    // Save everything to MongoDB
     await flock.save();
 
     res.status(200).json({
@@ -151,9 +157,29 @@ const completeFlock = async (req, res) => {
   }
 };
 
+const getFlockHistory = async (req, res) => {
+  try {
+    const flocks = await Flock.find({
+      user: req.user._id,
+      status: "completed",
+    }).sort({ completedAt: -1 });
+
+    res.status(200).json({
+      count: flocks.length,
+      flocks,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to get flock history",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createFlock,
   getActiveFlock,
   updateFlockStage,
   completeFlock,
+  getFlockHistory,
 };
