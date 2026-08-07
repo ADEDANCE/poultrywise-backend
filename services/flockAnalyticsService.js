@@ -3,7 +3,7 @@ const DailyRecord = require("../models/DailyRecord");
 
 const Flock = require("../models/Flock");
 
-const getDashboardSummary = async (userId) => {
+const getFlockAnalytics = async (userId) => {
   // Read all daily records for the logged-in user
   const dailyRecords = await DailyRecord.find({
     user: userId,
@@ -139,5 +139,5 @@ const getDashboardSummary = async (userId) => {
 };
 
 module.exports = {
-  getDashboardSummary,
+  getFlockAnalytics,
 };
