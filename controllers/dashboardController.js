@@ -1,4 +1,4 @@
-const { getDashboardSummary } = require("../services/dashboardService");
+const { getDashboardSummary } = require("../services/flockAnalyticsService");
 
 const dashboardSummary = async (req, res) => {
   try {
