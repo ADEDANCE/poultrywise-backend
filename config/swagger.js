@@ -13,12 +13,12 @@ const options = {
     },
 
     servers: [
+      //   {
+      //     url: "http://localhost:3000",
+      //     description: "Local development server",
+      //   },
       {
-        url: "http://localhost:3000",
-        description: "Local development server",
-      },
-      {
-        url: "https://YOUR-RENDER-URL.onrender.com",
+        url: "https://poultrywise-backend.onrender.com",
         description: "Production server",
       },
     ],
