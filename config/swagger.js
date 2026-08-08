@@ -18,6 +18,16 @@ const options = {
         description: "Local development server",
       },
     ],
+
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
   },
 
   apis: ["./routes/*.js"],
