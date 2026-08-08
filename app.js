@@ -9,7 +9,16 @@ const flockRoutes = require("./routes/flockRoutes");
 const dailyRecordRoutes = require("./routes/dailyRecordRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
+// import swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
+
+// import cors
+const cors = require("cors");
+
 const app = express();
+// enable CORS
+app.use(cors());
 
 connectDB();
 
@@ -30,6 +39,11 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("PoultryWise backend is running on port 3000");
+// swagger routre
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`PoultryWise backend is running on port ${PORT}`);
 });
