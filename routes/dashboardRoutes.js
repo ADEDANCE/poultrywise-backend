@@ -45,6 +45,6 @@ const { dashboardSummary } = require("../controllers/dashboardController");
  *       500:
  *         description: Failed to get dashboard summary
  */
-router.get("/", protect, dashboardSummary);
+router.get("/summary", protect, dashboardSummary);
 
 module.exports = router;
