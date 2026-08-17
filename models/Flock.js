@@ -32,7 +32,6 @@ const flockSchema = new mongoose.Schema(
 
     supplier: {
       type: String,
-      required: true,
       trim: true,
     },
 
