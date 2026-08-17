@@ -1,9 +1,9 @@
-const { getDashboardSummary } = require("../services/flockAnalyticsService");
+const { getFlockAnalytics } = require("../services/flockAnalyticsService");
 
 const dashboardSummary = async (req, res) => {
   try {
     // Calling the service
-    const summary = await getDashboardSummary(req.user._id);
+    const summary = await getFlockAnalytics(req.user._id);
     // Returning the response
     res.status(200).json(summary);
   } catch (error) {
