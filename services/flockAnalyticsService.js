@@ -22,17 +22,6 @@ const getFlockAnalytics = async (userId) => {
     };
   }
 
-  // Check if the farmer has any records
-  if (dailyRecords.length === 0) {
-    return {
-      totalExpenses: 0,
-      totalRevenue: 0,
-      netProfit: 0,
-      profitMargin: 0,
-      status: "No records",
-    };
-  }
-
   // Variables to store totals
   let totalExpenses = 0;
   let totalRevenue = 0;
