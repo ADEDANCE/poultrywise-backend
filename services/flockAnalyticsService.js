@@ -23,7 +23,7 @@ const getFlockAnalytics = async (userId) => {
   }
 
   // Variables to store totals
-  let totalExpenses = 0;
+
   let totalRevenue = 0;
 
   let totalFeedCost = 0;
@@ -44,8 +44,8 @@ const getFlockAnalytics = async (userId) => {
   // Loop through every daily record
   for (const record of dailyRecords) {
     totalFeedCost += record.feedCost || 0;
-totalMedicationCost += record.medicationCost || 0;
-totalVaccinationCost += record.vaccinationCost || 0;
+    totalMedicationCost += record.medicationCost || 0;
+    totalVaccinationCost += record.vaccinationCost || 0;
 
     const dailyEggRevenue =
       record.cratesSold * record.pricePerCrate +
