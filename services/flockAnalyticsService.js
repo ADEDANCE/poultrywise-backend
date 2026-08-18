@@ -43,9 +43,9 @@ const getFlockAnalytics = async (userId) => {
 
   // Loop through every daily record
   for (const record of dailyRecords) {
-    totalFeedCost += record.feedCost;
-    totalMedicationCost += record.medicationCost;
-    totalVaccinationCost += record.vaccinationCost;
+    totalFeedCost += record.feedCost || 0;
+totalMedicationCost += record.medicationCost || 0;
+totalVaccinationCost += record.vaccinationCost || 0;
 
     const dailyEggRevenue =
       record.cratesSold * record.pricePerCrate +
