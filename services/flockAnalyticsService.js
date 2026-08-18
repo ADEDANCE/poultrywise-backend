@@ -26,6 +26,14 @@ const getFlockAnalytics = async (userId) => {
   let totalExpenses = 0;
   let totalRevenue = 0;
 
+  let totalFeedCost = 0;
+  let totalMedicationCost = 0;
+  let totalVaccinationCost = 0;
+  // let totalElectricityCost = 0;
+  // let totalLabourCost = 0;
+  // let totalOtherCost = 0;
+  let totalEggRevenue = 0;
+
   let recommendedStage;
   let totalMortality = 0;
   const BROODING_MAX_DAYS = 56;
@@ -35,27 +43,25 @@ const getFlockAnalytics = async (userId) => {
 
   // Loop through every daily record
   for (const record of dailyRecords) {
-    // Calculate today's expenses
-    const dailyExpense =
-      record.feedCost +
-      record.medicationCost +
-      record.vaccinationCost +
-      record.electricityCost +
-      record.labourCost +
-      record.otherCost;
+    totalFeedCost += record.feedCost;
+    totalMedicationCost += record.medicationCost;
+    totalVaccinationCost += record.vaccinationCost;
 
-    // Add today's expense to the running total
-    totalExpenses += dailyExpense;
-
-    // Calculate today's revenue
-    const dailyRevenue =
+    const dailyEggRevenue =
       record.cratesSold * record.pricePerCrate +
       record.extraEggsSold * record.pricePerEgg;
 
-    // Add today's revenue to the running total
-    totalRevenue += dailyRevenue;
+    totalEggRevenue += dailyEggRevenue;
+    totalRevenue += dailyEggRevenue;
+
     totalMortality += record.mortality;
   }
+
+  const totalExpenses =
+    activeFlock.initialCost +
+    totalFeedCost +
+    totalMedicationCost +
+    totalVaccinationCost;
 
   // Calculate financial summary
   const netProfit = totalRevenue - totalExpenses;
@@ -110,6 +116,14 @@ const getFlockAnalytics = async (userId) => {
     roi,
     status,
 
+    financialBreakdown: {
+      initialCost: activeFlock.initialCost,
+      feedCost: totalFeedCost,
+      medicationCost: totalMedicationCost,
+      vaccinationCost: totalVaccinationCost,
+      eggRevenue: totalEggRevenue,
+    },
+
     birdsAlive,
     totalMortality,
     mortalityRate,
@@ -118,11 +132,8 @@ const getFlockAnalytics = async (userId) => {
     birdAgeWeeks,
 
     currentStage: activeFlock.currentStage,
-
     recommendedStage,
-
     stageChangeRequired,
-
     stageMessage,
   };
 };
