@@ -17,11 +17,11 @@ const createDailyRecord = async (req, res) => {
       vaccination,
       vaccinationCost,
 
-      electricityCost,
-      labourCost,
+      // electricityCost,
+      // labourCost,
 
-      otherCost,
-      otherCostDescription,
+      // otherCost,
+      // otherCostDescription,
 
       cratesCollected,
       extraEggsCollected,
@@ -67,11 +67,11 @@ const createDailyRecord = async (req, res) => {
       vaccination,
       vaccinationCost,
 
-      electricityCost,
-      labourCost,
+      // electricityCost,
+      // labourCost,
 
-      otherCost,
-      otherCostDescription,
+      // otherCost,
+      // otherCostDescription,
 
       cratesCollected,
       extraEggsCollected,

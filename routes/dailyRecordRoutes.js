@@ -36,15 +36,6 @@ const { createDailyRecord } = require("../controllers/dailyRecordController");
  *               vaccinationCost:
  *                 type: number
  *                 example: 3000
- *               electricityCost:
- *                 type: number
- *                 example: 2000
- *               labourCost:
- *                 type: number
- *                 example: 5000
- *               otherCost:
- *                 type: number
- *                 example: 1000
  *               cratesSold:
  *                 type: number
  *                 example: 5
