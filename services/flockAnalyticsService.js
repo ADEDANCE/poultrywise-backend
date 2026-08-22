@@ -13,7 +13,6 @@ const getFlockAnalytics = async (userId) => {
   const activeFlock = await Flock.findOne({
     user: userId,
     status: "active",
-    flock: activeFlock._id,
   });
 
   // Check if an active flock exists
@@ -116,6 +115,8 @@ const getFlockAnalytics = async (userId) => {
     ((totalMortality / activeFlock.numberOfBirds) * 100).toFixed(2),
   );
 
+  const finalBirdCount = activeFlock.numberOfBirds - totalMortality;
+
   return {
     totalExpenses,
     totalRevenue,
@@ -131,8 +132,10 @@ const getFlockAnalytics = async (userId) => {
       eggRevenue: totalEggRevenue,
     },
 
+    totalEggsProduced,
+
     birdsAlive,
-    finalBirdCount: birdsAlive,
+    finalBirdCount,
     totalMortality,
     mortalityRate,
 
