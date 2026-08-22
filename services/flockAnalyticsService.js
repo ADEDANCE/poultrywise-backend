@@ -13,6 +13,7 @@ const getFlockAnalytics = async (userId) => {
   const activeFlock = await Flock.findOne({
     user: userId,
     status: "active",
+    flock: activeFlock._id,
   });
 
   // Check if an active flock exists
@@ -33,6 +34,7 @@ const getFlockAnalytics = async (userId) => {
   // let totalLabourCost = 0;
   // let totalOtherCost = 0;
   let totalEggRevenue = 0;
+  let totalEggsProduced = 0;
 
   let recommendedStage;
   let totalMortality = 0;
@@ -53,6 +55,11 @@ const getFlockAnalytics = async (userId) => {
 
     totalEggRevenue += dailyEggRevenue;
     totalRevenue += dailyEggRevenue;
+
+    const dailyEggsProduced =
+      record.cratesCollected * 30 + record.extraEggsCollected;
+
+    totalEggsProduced += dailyEggsProduced;
 
     totalMortality += record.mortality;
   }
@@ -125,6 +132,7 @@ const getFlockAnalytics = async (userId) => {
     },
 
     birdsAlive,
+    finalBirdCount: birdsAlive,
     totalMortality,
     mortalityRate,
 
