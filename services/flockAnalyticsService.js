@@ -4,11 +4,6 @@ const DailyRecord = require("../models/DailyRecord");
 const Flock = require("../models/Flock");
 
 const getFlockAnalytics = async (userId) => {
-  // Read all daily records for the logged-in user
-  const dailyRecords = await DailyRecord.find({
-    user: userId,
-  });
-
   // get active flock
   const activeFlock = await Flock.findOne({
     user: userId,
@@ -22,6 +17,12 @@ const getFlockAnalytics = async (userId) => {
     };
   }
 
+  // Get daily records belonging to this specific flock
+  const dailyRecords = await DailyRecord.find({
+    user: userId,
+    flock: activeFlock._id,
+  });
+
   // Variables to store totals
 
   let totalRevenue = 0;
@@ -34,6 +35,7 @@ const getFlockAnalytics = async (userId) => {
   // let totalOtherCost = 0;
   let totalEggRevenue = 0;
   let totalEggsProduced = 0;
+  let totalEggsSold = 0;
 
   let recommendedStage;
   let totalMortality = 0;
@@ -51,6 +53,10 @@ const getFlockAnalytics = async (userId) => {
     const dailyEggRevenue =
       record.cratesSold * record.pricePerCrate +
       record.extraEggsSold * record.pricePerEgg;
+
+    const dailyEggsSold = record.cratesSold * 30 + record.extraEggsSold;
+
+    totalEggsSold += dailyEggsSold;
 
     totalEggRevenue += dailyEggRevenue;
     totalRevenue += dailyEggRevenue;

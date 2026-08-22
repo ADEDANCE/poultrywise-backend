@@ -94,6 +94,11 @@ const flockSchema = new mongoose.Schema(
         default: 0,
       },
 
+      totalEggsProduced: {
+        type: Number,
+        default: 0,
+      },
+
       totalEggsSold: {
         type: Number,
         default: 0,
