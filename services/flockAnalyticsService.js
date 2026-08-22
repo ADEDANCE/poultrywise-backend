@@ -140,6 +140,7 @@ const getFlockAnalytics = async (userId) => {
 
     totalEggsProduced,
 
+    totalEggsSold,
     birdsAlive,
     finalBirdCount,
     totalMortality,
